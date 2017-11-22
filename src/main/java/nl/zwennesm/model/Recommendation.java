@@ -5,19 +5,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
+import java.util.List;
 import java.util.Map;
 
 @Table("product")
-public class Product {
+public class Recommendation {
 
     @PrimaryKey
     private String sku;
-    private Map<String, Integer> recommendations;
+    private List<Long> recommendations;
 
-    public Product() {}
+    public Recommendation() {}
 
     @JsonCreator
-    public Product(@JsonProperty("sku") String sku, @JsonProperty("recommendations") Map<String, Integer> recs) {
+    public Recommendation(@JsonProperty("sku") String sku, @JsonProperty("recommendations") List<Long> recs) {
         this.sku = sku;
         this.recommendations = recs;
     }
@@ -30,11 +31,11 @@ public class Product {
         this.sku = sku;
     }
 
-    public Map<String, Integer> getRecommendations() {
+    public List<Long> getRecommendations() {
         return recommendations;
     }
 
-    public void setRecommendations(Map<String, Integer> recommendations) {
+    public void setRecommendations(List<Long> recommendations) {
         this.recommendations = recommendations;
     }
 

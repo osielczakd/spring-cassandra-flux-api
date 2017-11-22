@@ -1,6 +1,6 @@
 package nl.zwennesm.repository;
 
-import nl.zwennesm.model.Product;
+import nl.zwennesm.model.Recommendation;
 import org.springframework.data.cassandra.core.ReactiveCassandraOperations;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
@@ -16,18 +16,18 @@ public class CassandraProductRepository implements ProductRepository {
     }
 
     @Override
-    public Mono<Product> save(Product product) {
+    public Mono<Recommendation> save(Recommendation product) {
         return this.cassandraTemplate.insert(product);
     }
 
     @Override
-    public Mono<Product> update(Product product) {
+    public Mono<Recommendation> update(Recommendation product) {
         return cassandraTemplate.update(product);
     }
 
     @Override
-    public Mono<Product> findOne(String sku) {
-        return this.cassandraTemplate.selectOneById(sku, Product.class);
+    public Mono<Recommendation> findOne(String sku) {
+        return this.cassandraTemplate.selectOneById(sku, Recommendation.class);
     }
 
     @Override
@@ -36,7 +36,12 @@ public class CassandraProductRepository implements ProductRepository {
     }
 
     @Override
-    public Flux<Product> findByState(String state) {
+    public Flux<Recommendation> findByState(String state) {
         return null;
+    }
+
+    @Override
+    public Flux<Recommendation> getAll() {
+        return this.cassandraTemplate.select("select * from sample.recommend", Recommendation.class);
     }
 }
