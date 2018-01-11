@@ -8,17 +8,17 @@ import org.springframework.data.cassandra.core.mapping.Table;
 import java.util.List;
 import java.util.Map;
 
-@Table("product")
-public class Recommendation {
+@Table("Product")
+public class Product {
 
     @PrimaryKey
     private String sku;
     private List<Long> recommendations;
 
-    public Recommendation() {}
+    public Product() {}
 
     @JsonCreator
-    public Recommendation(@JsonProperty("sku") String sku, @JsonProperty("recommendations") List<Long> recs) {
+    public Product(@JsonProperty("sku") String sku, @JsonProperty("recommendations") List<Long> recs) {
         this.sku = sku;
         this.recommendations = recs;
     }

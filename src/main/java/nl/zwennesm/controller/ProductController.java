@@ -1,6 +1,6 @@
 package nl.zwennesm.controller;
 
-import nl.zwennesm.model.Recommendation;
+import nl.zwennesm.model.Product;
 import nl.zwennesm.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/recommend/product")
 public class ProductController {
 
     private final ProductService productService;
@@ -18,21 +18,21 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping(path = "/recommend/add")
-    public Mono<Recommendation> put(@RequestBody Recommendation product) {
+    @PostMapping(path = "/add")
+    public Mono<Product> put(@RequestBody Product product) {
         return this.productService.save(product);
     }
 
-    @GetMapping(path = "/recommend/{sku}")
-    public Mono<Recommendation> get(@PathVariable("sku") String sku) {
-        return this.productService.find(sku);
+    @GetMapping(path = "/{sku}")
+    public Mono<Product> get(@PathVariable("sku") String sku) {
+        return this.productService.findOne(sku);
     }
 
-    @PostMapping(path = "/recommend/{sku}")
-    public Mono<Recommendation> update(@RequestBody Recommendation product) {
+    @PostMapping(path = "/{sku}")
+    public Mono<Product> update(@RequestBody Product product) {
         return this.productService.update(product);
     }
 
-    @GetMapping(path = "/recommend/all")
-    public Flux<Recommendation> all() { return this.productService.getAll(); }
+    @GetMapping(path = "/all")
+    public Flux<Product> all() { return this.productService.getAll(); }
 }
