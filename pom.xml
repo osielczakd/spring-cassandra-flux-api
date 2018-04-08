@@ -5,7 +5,7 @@
 
 	<groupId>nl.zwennesm</groupId>
 	<artifactId>fluxapi</artifactId>
-	<version>1.2.0-SNAPSHOT</version>
+	<version>1.3.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>fluxapi</name>
